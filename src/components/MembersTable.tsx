@@ -4,15 +4,15 @@ import {
   type MRT_ColumnDef,
 } from "mantine-react-table";
 import { useMemo } from "react";
-import { MemberType } from "../type";
+import { CompanyMemberType, CompanyMemberTypeItem } from "../type";
 
 type Props = {
-  data?: MemberType[];
+  data?: CompanyMemberType;
   isLoading: boolean;
 };
 
-export const MembersTable = ({ data = [], isLoading }: Props) => {
-  const columns = useMemo<MRT_ColumnDef<MemberType>[]>(
+export const CompanyMembersTable = ({ data, isLoading }: Props) => {
+  const columns = useMemo<MRT_ColumnDef<CompanyMemberTypeItem>[]>(
     () => [
       {
         header: "Name",
@@ -44,7 +44,7 @@ export const MembersTable = ({ data = [], isLoading }: Props) => {
 
   const table = useMantineReactTable({
     columns,
-    data,
+    data: data?.items || [],
     enableColumnActions: false,
     enableColumnFilters: false,
     enablePagination: false,
@@ -70,4 +70,4 @@ export const MembersTable = ({ data = [], isLoading }: Props) => {
   return <MRT_Table table={table} />;
 };
 
-export default MembersTable;
+export default CompanyMembersTable;

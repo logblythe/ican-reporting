@@ -2,7 +2,6 @@ import {
   Center,
   Flex,
   Image,
-  Select,
   Stack,
   Tabs,
   TextInput,
@@ -21,18 +20,19 @@ const CorporateMembersTable = lazy(
 const MembersTable = lazy(() => import("./components/MembersTable"));
 
 export const App = () => {
-  const [company, setCompany] = useState<string | null>("FNBO");
-  const [cid, setCid] = useState<string>("12344");
+  const [company, setCompany] = useState<string>("swoogo");
+  const [cid, setCid] = useState<string>("23613927");
   const [response, setResponse] = useState<MemberResponseType | null>(null);
   const [networkStatus, setNetworkStatus] = useState<NetworkStatus>("idle");
   const debouncedCid = useDebounce(cid, 500);
+  const debouncedCompany = useDebounce(company, 500);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setNetworkStatus("loading");
         const networkResponse = await fetch(
-          `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report?company=${company}&cid=${debouncedCid}`,
+          `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report?company=${debouncedCompany}&cid=${debouncedCid}`,
           {
             method: "GET",
           }
@@ -45,7 +45,7 @@ export const App = () => {
       }
     };
     fetchData();
-  }, [company, debouncedCid]);
+  }, [debouncedCompany, debouncedCid]);
 
   return (
     <Stack>
@@ -77,11 +77,10 @@ export const App = () => {
       </Stack>
       <Stack px={"sm"}>
         <Flex gap={"lg"}>
-          <Select
-            label="Select a company"
-            data={["FNBO", "Swoogo", "ican"]}
+          <TextInput
+            label="Enter company"
             value={company}
-            onChange={setCompany}
+            onChange={(event) => setCompany(event.target.value)}
             w={300}
           />
           <TextInput
@@ -107,7 +106,7 @@ export const App = () => {
           <Tabs.Panel value="members">
             <Suspense fallback={null}>
               <MembersTable
-                data={response?.member}
+                data={response?.companyMember}
                 isLoading={networkStatus === "loading"}
               />
             </Suspense>
@@ -115,7 +114,7 @@ export const App = () => {
           <Tabs.Panel value="company-members">
             <Suspense fallback={null}>
               <CorporateMembersTable
-                data={response?.companyMember}
+                data={response?.corporateMember}
                 isLoading={networkStatus === "loading"}
               />
             </Suspense>
