@@ -1,19 +1,24 @@
+import { Stack, Text } from "@mantine/core";
 import {
   MRT_Table,
   useMantineReactTable, //import alternative sub-component if we do not want toolbars
   type MRT_ColumnDef,
 } from "mantine-react-table";
 import { useMemo } from "react";
-import { CompanyMemberType, CompanyMemberTypeItem } from "../type";
+import { Member, MemberType } from "../../type";
 
 type Props = {
-  data?: CompanyMemberType;
+  data?: MemberType;
   isLoading: boolean;
 };
 
-export const CompanyMembersTable = ({ data, isLoading }: Props) => {
-  const columns = useMemo<MRT_ColumnDef<CompanyMemberTypeItem>[]>(
+export const IndividualMembersTable = ({ data, isLoading }: Props) => {
+  const columns = useMemo<MRT_ColumnDef<Member>[]>(
     () => [
+      {
+        accessorKey: "id",
+        header: "ID",
+      },
       {
         header: "Name",
         Cell: ({ row }) => (
@@ -25,6 +30,20 @@ export const CompanyMembersTable = ({ data, isLoading }: Props) => {
       {
         accessorKey: "email",
         header: "Email",
+      },
+      {
+        header: "Registration Type",
+        Cell: ({ row }) => (
+          <div>
+            {row.original.reg_type_id.id === 340758
+              ? "Corporate Block"
+              : "Partnership"}
+          </div>
+        ),
+      },
+      {
+        header: "Code",
+        Cell: ({ row }) => <div>{row.original.discount_code.value}</div>,
       },
       {
         header: "Type",
@@ -44,7 +63,7 @@ export const CompanyMembersTable = ({ data, isLoading }: Props) => {
 
   const table = useMantineReactTable({
     columns,
-    data: data?.items || [],
+    data: data?.items ?? [],
     enableColumnActions: false,
     enableColumnFilters: false,
     enablePagination: false,
@@ -67,7 +86,16 @@ export const CompanyMembersTable = ({ data, isLoading }: Props) => {
     },
   });
 
-  return <MRT_Table table={table} />;
+  return (
+    <Stack>
+      <MRT_Table table={table} />
+      {isLoading ? null : (
+        <Text fw={500} p={8}>
+          Total count : {data?.totalCount}
+        </Text>
+      )}
+    </Stack>
+  );
 };
 
-export default CompanyMembersTable;
+export default IndividualMembersTable;

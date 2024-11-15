@@ -1,18 +1,19 @@
+import { Stack, Text } from "@mantine/core";
 import {
   MRT_Table,
   useMantineReactTable, //import alternative sub-component if we do not want toolbars
   type MRT_ColumnDef,
 } from "mantine-react-table";
 import { useMemo } from "react";
-import { CorporateMemberType, CorporateMemberTypeItem } from "../type";
+import { Member, MemberType } from "../../type";
 
 type Props = {
-  data?: CorporateMemberType;
+  data?: MemberType;
   isLoading: boolean;
 };
 
 export const CorporateMembersTable = ({ data, isLoading }: Props) => {
-  const columns = useMemo<MRT_ColumnDef<CorporateMemberTypeItem>[]>(
+  const columns = useMemo<MRT_ColumnDef<Member>[]>(
     () => [
       {
         header: "Name",
@@ -69,7 +70,16 @@ export const CorporateMembersTable = ({ data, isLoading }: Props) => {
     },
   });
 
-  return <MRT_Table table={table} />;
+  return (
+    <Stack>
+      <MRT_Table table={table} />
+      {isLoading ? null : (
+        <Text fw={500} p={8}>
+          Total count : {data?.totalCount}
+        </Text>
+      )}
+    </Stack>
+  );
 };
 
 export default CorporateMembersTable;

@@ -13,11 +13,15 @@ import logo from "./assets/ican-logo.png";
 import useDebounce from "./hooks/useDebounce";
 import { MemberResponseType, NetworkStatus } from "./type";
 
-const CorporateMembersTable = lazy(
-  () => import("./components/CorporateMembersTable")
+const CompanyMembersTable = lazy(
+  () => import("./components/tables/CompanyMembers")
 );
-
-const MembersTable = lazy(() => import("./components/MembersTable"));
+const CorporateMembersTable = lazy(
+  () => import("./components/tables/CorporateMembers")
+);
+const IndividualMembersTable = lazy(
+  () => import("./components/tables/IndividualMembers")
+);
 
 export const App = () => {
   const [company, setCompany] = useState<string>("swoogo");
@@ -103,20 +107,39 @@ export const App = () => {
               Registrations not under this partnership
             </Tabs.Tab>
           </Tabs.List>
-          <Tabs.Panel value="members">
+          <Tabs.Panel value="members" p={8}>
             <Suspense fallback={null}>
-              <MembersTable
+              <CompanyMembersTable
                 data={response?.companyMember}
                 isLoading={networkStatus === "loading"}
               />
             </Suspense>
           </Tabs.Panel>
-          <Tabs.Panel value="company-members">
+          <Tabs.Panel value="company-members" p={8}>
             <Suspense fallback={null}>
-              <CorporateMembersTable
-                data={response?.corporateMember}
-                isLoading={networkStatus === "loading"}
-              />
+              <Tabs
+                variant="outline"
+                defaultValue="corporate-blocks"
+                classNames={{ tabLabel: "tabLabel" }}
+                orientation="vertical"
+              >
+                <Tabs.List>
+                  <Tabs.Tab value="corporate-blocks">Corporate Blocks</Tabs.Tab>
+                  <Tabs.Tab value="individuals">Individual</Tabs.Tab>
+                </Tabs.List>
+                <Tabs.Panel value="corporate-blocks">
+                  <CorporateMembersTable
+                    data={response?.corporateMember}
+                    isLoading={networkStatus === "loading"}
+                  />
+                </Tabs.Panel>
+                <Tabs.Panel value="individuals">
+                  <IndividualMembersTable
+                    data={response?.individualMember}
+                    isLoading={networkStatus === "loading"}
+                  />
+                </Tabs.Panel>
+              </Tabs>
             </Suspense>
           </Tabs.Panel>
         </Tabs>

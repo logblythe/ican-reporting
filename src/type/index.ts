@@ -1,22 +1,12 @@
 export type NetworkStatus = "idle" | "loading" | "success" | "error";
 
-export type CompanyMemberTypeItem = {
-  c_1401925: {
-    id: number;
-    value: string;
-  };
-  first_name: string;
-  last_name: string;
-  email: string;
-  registration_status: string;
-};
-
-export type CompanyMemberType = {
-  items: Array<CompanyMemberTypeItem>;
+export type MemberType = {
+  items: Array<Member>;
   totalCount: number;
 };
 
-export type CorporateMemberTypeItem = {
+export type Member = {
+  id: string;
   reg_type_id: {
     id: number;
     value: string;
@@ -35,13 +25,8 @@ export type CorporateMemberTypeItem = {
   registration_status: string;
 };
 
-export type CorporateMemberType = {
-  items: Array<CorporateMemberTypeItem>;
-  totalCount: number;
-};
-
 export type MemberResponseType = {
-  companyMember: CompanyMemberType;
-  corporateMember: CorporateMemberType;
-  individualMember: null;
+  companyMember: MemberType;
+  corporateMember: MemberType;
+  individualMember: MemberType;
 };
