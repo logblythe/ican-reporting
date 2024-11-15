@@ -1,5 +1,5 @@
 import {
-  Center,
+  Divider,
   Flex,
   Image,
   Stack,
@@ -8,8 +8,7 @@ import {
   Title,
 } from "@mantine/core";
 import { lazy, Suspense, useEffect, useState } from "react";
-import header from "./assets/ican-header.png";
-import logo from "./assets/ican-logo.png";
+import header from "./assets/ican-header.jpg";
 import useDebounce from "./hooks/useDebounce";
 import { MemberResponseType, NetworkStatus } from "./type";
 
@@ -52,34 +51,14 @@ export const App = () => {
   }, [debouncedCompany, debouncedCid]);
 
   return (
-    <Stack>
-      <Stack spacing={0}>
-        <Flex gap={"xl"}>
-          <Image
-            maw={200}
-            h={62}
-            alt="ican-logo"
-            src={logo}
-            py={"xs"}
-            pl={"xs"}
-            mr={"xl"}
-          />
-          <Center ml={"xl"}>
-            <Title
-              order={2}
-              align="center"
-              weight={700}
-              my={"auto"}
-              size={28}
-              color="#8b1a71"
-            >
-              Partner Report
-            </Title>
-          </Center>
-        </Flex>
-        <Image height={"1vw"} src={header} fit="fill" alt="ican-header" />
-      </Stack>
-      <Stack px={"sm"}>
+    <Stack spacing={0}>
+      <Image alt="ican-logo" src={header} />
+      <Divider color="#8b1a71" />
+      <Title order={2} weight={700} size={28} color="#8b1a71" p={"md"}>
+        Partner Report
+      </Title>
+      <Divider color="#8b1a71" />
+      <Stack p={"sm"}>
         <Flex gap={"lg"}>
           <TextInput
             label="Enter company"
@@ -107,7 +86,7 @@ export const App = () => {
               Registrations not under this partnership
             </Tabs.Tab>
           </Tabs.List>
-          <Tabs.Panel value="members" p={8}>
+          <Tabs.Panel value="members" py={8} px={2}>
             <Suspense fallback={null}>
               <CompanyMembersTable
                 data={response?.companyMember}
@@ -127,13 +106,13 @@ export const App = () => {
                   <Tabs.Tab value="corporate-blocks">Corporate Blocks</Tabs.Tab>
                   <Tabs.Tab value="individuals">Individual</Tabs.Tab>
                 </Tabs.List>
-                <Tabs.Panel value="corporate-blocks">
+                <Tabs.Panel value="corporate-blocks" p={8}>
                   <CorporateMembersTable
                     data={response?.corporateMember}
                     isLoading={networkStatus === "loading"}
                   />
                 </Tabs.Panel>
-                <Tabs.Panel value="individuals">
+                <Tabs.Panel value="individuals" p={8}>
                   <IndividualMembersTable
                     data={response?.individualMember}
                     isLoading={networkStatus === "loading"}
