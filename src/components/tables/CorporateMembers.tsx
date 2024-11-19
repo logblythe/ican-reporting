@@ -5,41 +5,31 @@ import {
   type MRT_ColumnDef,
 } from "mantine-react-table";
 import { useMemo } from "react";
-import { Member, MemberType } from "../../type";
+import { CorporateMember } from "../../type";
 
 type Props = {
-  data?: MemberType;
+  data?: CorporateMember[];
   isLoading: boolean;
 };
 
-export const CorporateMembersTable = ({ data, isLoading }: Props) => {
-  const columns = useMemo<MRT_ColumnDef<Member>[]>(
+export const CorporateMembersTable = ({ data = [], isLoading }: Props) => {
+  const columns = useMemo<MRT_ColumnDef<CorporateMember>[]>(
     () => [
       {
+        accessorKey: "name",
         header: "Name",
-        Cell: ({ row }) => (
-          <div>
-            {row.original.first_name} {row.original.last_name}
-          </div>
-        ),
       },
       {
         accessorKey: "email",
         header: "Email",
       },
       {
+        accessorKey: "registrationType",
         header: "Registration Type",
-        Cell: ({ row }) => (
-          <div>
-            {row.original.reg_type_id.id === 340758
-              ? "Corporate Block"
-              : "Partnership"}
-          </div>
-        ),
       },
       {
+        accessorKey: "discountCode",
         header: "Code",
-        Cell: ({ row }) => <div>{row.original.discount_code.value}</div>,
       },
     ],
     []
@@ -47,7 +37,7 @@ export const CorporateMembersTable = ({ data, isLoading }: Props) => {
 
   const table = useMantineReactTable({
     columns,
-    data: data?.items ?? [],
+    data,
     enableColumnActions: false,
     enableColumnFilters: false,
     enablePagination: false,
@@ -75,7 +65,7 @@ export const CorporateMembersTable = ({ data, isLoading }: Props) => {
       <MRT_Table table={table} />
       {isLoading ? null : (
         <Text fw={500} p={8}>
-          Total count : {data?.totalCount}
+          Total count : {data?.length}
         </Text>
       )}
     </Stack>

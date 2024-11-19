@@ -89,7 +89,7 @@ export const App = () => {
           <Tabs.Panel value="members" py={8} px={2}>
             <Suspense fallback={null}>
               <CompanyMembersTable
-                data={response?.companyMember}
+                data={response?.companyMembers}
                 isLoading={networkStatus === "loading"}
               />
             </Suspense>
@@ -108,13 +108,13 @@ export const App = () => {
                 </Tabs.List>
                 <Tabs.Panel value="corporate-blocks" p={8}>
                   <CorporateMembersTable
-                    data={response?.corporateMember}
+                    data={response?.corporateMembers}
                     isLoading={networkStatus === "loading"}
                   />
                 </Tabs.Panel>
                 <Tabs.Panel value="individuals" p={8}>
                   <IndividualMembersTable
-                    data={response?.individualMember}
+                    data={response?.individualMembers}
                     isLoading={networkStatus === "loading"}
                   />
                 </Tabs.Panel>
