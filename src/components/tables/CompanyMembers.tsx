@@ -4,8 +4,8 @@ import {
   useMantineReactTable, //import alternative sub-component if we do not want toolbars
   type MRT_ColumnDef,
 } from "mantine-react-table";
-import { useMemo } from "react";
 import { CompanyMember } from "../../type";
+import { COMPANY_MEMBER_COLUMNS } from "./columns";
 
 type Props = {
   data?: CompanyMember[];
@@ -13,30 +13,8 @@ type Props = {
 };
 
 export const CompanyMembersTable = ({ data = [], isLoading }: Props) => {
-  const columns = useMemo<MRT_ColumnDef<CompanyMember>[]>(
-    () => [
-      {
-        accessorKey: "name",
-        header: "Name",
-      },
-      {
-        accessorKey: "email",
-        header: "Email",
-      },
-      {
-        accessorKey: "attendanceType",
-        header: "Type",
-      },
-      {
-        accessorKey: "registrationStatus",
-        header: "Complete",
-      },
-    ],
-    []
-  );
-
   const table = useMantineReactTable({
-    columns,
+    columns: COMPANY_MEMBER_COLUMNS as MRT_ColumnDef<CompanyMember>[],
     data,
     enableColumnActions: false,
     enableColumnFilters: false,
