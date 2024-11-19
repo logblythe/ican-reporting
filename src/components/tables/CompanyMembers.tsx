@@ -20,13 +20,14 @@ export const CompanyMembersTable = ({ data = [], isLoading }: Props) => {
     enableColumnFilters: false,
     enablePagination: false,
     enableSorting: false,
+    enableStickyHeader: true,
     state: { isLoading },
     mantineTableProps: {
       highlightOnHover: true,
       withColumnBorders: true,
       sx: {
         "thead > tr": {
-          backgroundColor: "inherit",
+          backgroundColor: "white",
         },
         "thead > tr > th": {
           backgroundColor: "inherit",
