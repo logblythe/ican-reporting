@@ -29,6 +29,11 @@ export const CORPORATE_MEMBER_COLUMNS: MRT_ColumnDef<CorporateMember>[] = [
     accessorKey: "email",
     header: "Email",
   },
+  { accessorKey: "inPersonSeats", header: "In Person Seats" },
+  {
+    accessorKey: "virtualSeats",
+    header: "Virtual Seats",
+  },
   {
     accessorKey: "registrationType",
     header: "Registration Type",

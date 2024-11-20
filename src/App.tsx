@@ -71,9 +71,18 @@ export const App = () => {
     <Stack spacing={0}>
       <Image alt="ican-logo" src={header} />
       <Divider color="#ff1d6c" />
-      <Title order={2} weight={700} size={28} color="#ff1d6c" p={"md"}>
+      <Title order={2} weight={700} size={28} color="#ff1d6c" px={"md"}>
         Partner Report
       </Title>
+      <Text fw={500} px={"md"} color="dimmed">
+        Grand total:{" "}
+        {response
+          ? response!.companyMembers.length +
+            response!.corporateMembers.length +
+            response!.individualMembers.length
+          : 0}
+        {}
+      </Text>
       <Divider color="#ff1d6c" />
       <Stack p={"sm"}>
         <Text color="#2647ff" size={"xl"} weight={500}>
