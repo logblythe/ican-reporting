@@ -1,4 +1,4 @@
-import { Stack, Text } from "@mantine/core";
+import { Card, Stack, Text } from "@mantine/core";
 import {
   MRT_Table,
   useMantineReactTable, //import alternative sub-component if we do not want toolbars
@@ -40,14 +40,21 @@ export const CorporateMembersTable = ({ data = [], isLoading }: Props) => {
   });
 
   return (
-    <Stack>
-      <MRT_Table table={table} />
-      {isLoading ? null : (
-        <Text fw={500} p={8}>
-          Total count : {data?.length}
+    <Card shadow="sm" padding="0" radius="md" withBorder>
+      <Card.Section withBorder inheritPadding p="xs">
+        <Text color="#2647ff" size={"lg"} weight={500}>
+          Corporate Blocks
         </Text>
-      )}
-    </Stack>
+      </Card.Section>
+      <Stack>
+        <MRT_Table table={table} />
+        {isLoading ? null : (
+          <Text fw={500} p={8}>
+            Total count : {data?.length}
+          </Text>
+        )}
+      </Stack>
+    </Card>
   );
 };
 

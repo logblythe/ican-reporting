@@ -1,13 +1,5 @@
-import {
-  Divider,
-  Flex,
-  Image,
-  Stack,
-  Tabs,
-  TextInput,
-  Title,
-} from "@mantine/core";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { Divider, Image, Space, Stack, Text, Title } from "@mantine/core";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import header from "./assets/ican-header.jpg";
 import useDebounce from "./hooks/useDebounce";
 import { MemberResponseType, NetworkStatus } from "./type";
@@ -23,14 +15,39 @@ const IndividualMembersTable = lazy(
 );
 
 export const App = () => {
-  const [company, setCompany] = useState<string>("swoogo");
-  const [cid, setCid] = useState<string>("23613927");
+  const queryParams = useMemo(
+    () => new URLSearchParams(window.location.search),
+    []
+  );
+  const companyParam = queryParams.get("company") ?? "";
+  const cidParam = queryParams.get("cid") ?? "";
+
+  const [company, setCompany] = useState<string>(companyParam);
+  const [cid, setCid] = useState<string>(cidParam);
   const [response, setResponse] = useState<MemberResponseType | null>(null);
   const [networkStatus, setNetworkStatus] = useState<NetworkStatus>("idle");
+
   const debouncedCid = useDebounce(cid, 500);
   const debouncedCompany = useDebounce(company, 500);
 
   useEffect(() => {
+    if (!companyParam || !cidParam) {
+      queryParams.set("company", "swoogo");
+      queryParams.set("cid", "23613927");
+      window.history.pushState(
+        {},
+        "",
+        `${window.location.pathname}?${queryParams.toString()}`
+      );
+      setCompany("swoogo");
+      setCid("23613927");
+    }
+  }, [cidParam, companyParam, queryParams]);
+
+  useEffect(() => {
+    if (debouncedCompany.length === 0 || debouncedCid.length === 0) {
+      return;
+    }
     const fetchData = async () => {
       try {
         setNetworkStatus("loading");
@@ -48,80 +65,43 @@ export const App = () => {
       }
     };
     fetchData();
-  }, [debouncedCompany, debouncedCid]);
+  }, [debouncedCid, debouncedCompany]);
 
   return (
     <Stack spacing={0}>
       <Image alt="ican-logo" src={header} />
-      <Divider color="#8b1a71" />
-      <Title order={2} weight={700} size={28} color="#8b1a71" p={"md"}>
+      <Divider color="#ff1d6c" />
+      <Title order={2} weight={700} size={28} color="#ff1d6c" p={"md"}>
         Partner Report
       </Title>
-      <Divider color="#8b1a71" />
+      <Divider color="#ff1d6c" />
       <Stack p={"sm"}>
-        <Flex gap={"lg"}>
-          <TextInput
-            label="Enter company"
-            value={company}
-            onChange={(event) => setCompany(event.target.value)}
-            w={300}
+        <Text color="#2647ff" size={"xl"} weight={500}>
+          Registrations under this partnership
+        </Text>
+        <Suspense fallback={null}>
+          <CompanyMembersTable
+            data={response?.companyMembers}
+            isLoading={networkStatus === "loading"}
           />
-          <TextInput
-            label="Enter Cid"
-            placeholder="Enter cid"
-            value={cid}
-            onChange={(event) => setCid(event.target.value)}
+        </Suspense>
+        <Space h={"xl"} />
+        <Text color="#2647ff" size={"xl"} weight={500}>
+          Registrations not under this partnership
+        </Text>
+        <Suspense fallback={null}>
+          <CorporateMembersTable
+            data={response?.corporateMembers}
+            isLoading={networkStatus === "loading"}
           />
-        </Flex>
-        <Tabs
-          variant="outline"
-          defaultValue="members"
-          classNames={{ tabLabel: "tabLabel" }}
-        >
-          <Tabs.List>
-            <Tabs.Tab value="members">
-              Registrations under this partnership
-            </Tabs.Tab>
-            <Tabs.Tab value="company-members">
-              Registrations not under this partnership
-            </Tabs.Tab>
-          </Tabs.List>
-          <Tabs.Panel value="members" py={8} px={2}>
-            <Suspense fallback={null}>
-              <CompanyMembersTable
-                data={response?.companyMembers}
-                isLoading={networkStatus === "loading"}
-              />
-            </Suspense>
-          </Tabs.Panel>
-          <Tabs.Panel value="company-members" p={8}>
-            <Suspense fallback={null}>
-              <Tabs
-                variant="outline"
-                defaultValue="corporate-blocks"
-                classNames={{ tabLabel: "tabLabel" }}
-                orientation="vertical"
-              >
-                <Tabs.List>
-                  <Tabs.Tab value="corporate-blocks">Corporate Blocks</Tabs.Tab>
-                  <Tabs.Tab value="individuals">Individual</Tabs.Tab>
-                </Tabs.List>
-                <Tabs.Panel value="corporate-blocks" p={8}>
-                  <CorporateMembersTable
-                    data={response?.corporateMembers}
-                    isLoading={networkStatus === "loading"}
-                  />
-                </Tabs.Panel>
-                <Tabs.Panel value="individuals" p={8}>
-                  <IndividualMembersTable
-                    data={response?.individualMembers}
-                    isLoading={networkStatus === "loading"}
-                  />
-                </Tabs.Panel>
-              </Tabs>
-            </Suspense>
-          </Tabs.Panel>
-        </Tabs>
+        </Suspense>
+        <Suspense fallback={null}>
+          <IndividualMembersTable
+            data={response?.individualMembers}
+            isLoading={networkStatus === "loading"}
+          />
+        </Suspense>
+        <Space h={"xl"} />
       </Stack>
     </Stack>
   );
