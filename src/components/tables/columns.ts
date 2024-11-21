@@ -62,10 +62,6 @@ export const INDIVIDUAL_MEMBER_COLUMNS: MRT_ColumnDef<IndividualMember>[] = [
     header: "Registration Type",
   },
   {
-    accessorKey: "discountCode",
-    header: "Code",
-  },
-  {
     accessorKey: "attendanceType",
     header: "Type",
   },
