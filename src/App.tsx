@@ -1,7 +1,6 @@
 import { Divider, Image, Space, Stack, Text, Title } from "@mantine/core";
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import header from "./assets/ican-header.jpg";
-import useDebounce from "./hooks/useDebounce";
 import { MemberResponseType, NetworkStatus } from "./type";
 
 const CompanyMembersTable = lazy(
@@ -21,15 +20,14 @@ export const App = () => {
   );
   const companyParam = queryParams.get("company") ?? "";
   const cidParam = queryParams.get("cid") ?? "";
-  const yearParam = queryParams.get("year") ?? "2024";
+  const yearParam = queryParams.get("year") ?? "";
 
   const [company, setCompany] = useState<string>(companyParam);
   const [cid, setCid] = useState<string>(cidParam);
+  const [year, setYear] = useState<string>(yearParam);
+
   const [response, setResponse] = useState<MemberResponseType | null>(null);
   const [networkStatus, setNetworkStatus] = useState<NetworkStatus>("idle");
-
-  const debouncedCid = useDebounce(cid, 500);
-  const debouncedCompany = useDebounce(company, 500);
 
   useEffect(() => {
     if (!companyParam || !cidParam) {
@@ -41,20 +39,21 @@ export const App = () => {
         "",
         `${window.location.pathname}?${queryParams.toString()}`
       );
-      setCompany("swoogo");
-      setCid("23613927");
+      setCompany("fnbo");
+      setCid("33897499");
+      setYear("2024");
     }
   }, [cidParam, companyParam, queryParams]);
 
   useEffect(() => {
-    if (debouncedCompany.length === 0 || debouncedCid.length === 0) {
+    if (company.length === 0 || cid.length === 0) {
       return;
     }
     const fetchData = async () => {
       try {
         setNetworkStatus("loading");
         const networkResponse = await fetch(
-          `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report?company=${debouncedCompany}&cid=${debouncedCid}&year=${yearParam}`,
+          `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report?company=${company}&cid=${cid}&year=${year}`,
           {
             method: "GET",
           }
@@ -67,7 +66,7 @@ export const App = () => {
       }
     };
     fetchData();
-  }, [debouncedCid, debouncedCompany]);
+  }, [cid, company, year]);
 
   return (
     <Stack spacing={0}>
