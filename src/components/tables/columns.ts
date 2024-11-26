@@ -39,7 +39,7 @@ export const CORPORATE_MEMBER_COLUMNS: MRT_ColumnDef<CorporateMember>[] = [
     header: "Registration Type",
   },
   {
-    accessorKey: "discountCode",
+    accessorKey: "blockCode",
     header: "Code",
   },
 ];
