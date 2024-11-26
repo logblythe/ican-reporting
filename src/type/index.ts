@@ -21,7 +21,6 @@ export type CorporateMember = BaseMember & {
 export type IndividualMember = BaseMember & {
   id: string;
   registrationType: string;
-  discountCode: string;
 };
 
 export type MemberResponseType = {

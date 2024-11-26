@@ -21,6 +21,7 @@ export const App = () => {
   );
   const companyParam = queryParams.get("company") ?? "";
   const cidParam = queryParams.get("cid") ?? "";
+  const yearParam = queryParams.get("year") ?? "2024";
 
   const [company, setCompany] = useState<string>(companyParam);
   const [cid, setCid] = useState<string>(cidParam);
@@ -32,8 +33,9 @@ export const App = () => {
 
   useEffect(() => {
     if (!companyParam || !cidParam) {
-      queryParams.set("company", "swoogo");
-      queryParams.set("cid", "23613927");
+      queryParams.set("company", "fnbo");
+      queryParams.set("cid", "33897499");
+      queryParams.set("year", "2024");
       window.history.pushState(
         {},
         "",
@@ -52,7 +54,7 @@ export const App = () => {
       try {
         setNetworkStatus("loading");
         const networkResponse = await fetch(
-          `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report?company=${debouncedCompany}&cid=${debouncedCid}`,
+          `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report?company=${debouncedCompany}&cid=${debouncedCid}&year=${yearParam}`,
           {
             method: "GET",
           }
