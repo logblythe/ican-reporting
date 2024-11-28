@@ -78,9 +78,9 @@ export const App = () => {
       <Text fw={500} px={"md"} color="dimmed">
         Grand total:{" "}
         {response
-          ? response!.companyMembers.length +
-            response!.corporateMembers.length +
-            response!.individualMembers.length
+          ? response!.companyMemberSize +
+            response!.individualMemberSize +
+            response!.corporateAttendingMemberSize
           : 0}
         {}
       </Text>

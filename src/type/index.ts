@@ -27,4 +27,8 @@ export type MemberResponseType = {
   companyMembers: CompanyMember[];
   corporateMembers: CorporateMember[];
   individualMembers: IndividualMember[];
+  companyMemberSize: number;
+  corporateAttendingMemberSize: number;
+  corporateNonAttendingMemberSize: number;
+  individualMemberSize: number;
 };
