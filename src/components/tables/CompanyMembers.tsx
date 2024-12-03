@@ -50,7 +50,7 @@ export const CompanyMembersTable = ({ data = [], isLoading }: Props) => {
         <MRT_Table table={table} />
         {isLoading ? null : (
           <Text fw={500} p={8}>
-            Total count : {data?.length}
+            Total Count : {data?.length}
           </Text>
         )}
       </Stack>

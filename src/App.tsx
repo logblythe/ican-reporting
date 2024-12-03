@@ -76,13 +76,18 @@ export const App = () => {
         Partner Report
       </Title>
       <Text fw={500} px={"md"} color="dimmed">
-        Grand total:{" "}
+        Grand Total:{" "}
         {response
           ? response!.companyMemberSize +
             response!.individualMemberSize +
             response!.corporateAttendingMemberSize
           : 0}
-        {}
+      </Text>
+      <Text fw={400} px={"md"} color="dimmed">
+        *Note: This is the number of registrants in the system, you may have
+        paid for seats accounted for that a registrant has not yet claimed their
+        seat within a partnership or corporate block. They will be included in
+        the count upon submission of their registration using your custom link.
       </Text>
       <Divider color="#ff1d6c" />
       <Stack p={"sm"}>
