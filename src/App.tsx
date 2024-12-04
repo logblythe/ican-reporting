@@ -75,7 +75,7 @@ export const App = () => {
       <Title order={2} weight={700} size={28} color="#ff1d6c" px={"md"}>
         Partner Report
       </Title>
-      <Text fw={500} px={"md"} color="dimmed">
+      <Text fw={500} px={"md"} color="#162034">
         Grand Total:{" "}
         {response
           ? response!.companyMemberSize +
@@ -83,11 +83,12 @@ export const App = () => {
             response!.corporateAttendingMemberSize
           : 0}
       </Text>
-      <Text fw={400} px={"md"} color="dimmed">
-        *Note: This is the number of registrants in the system, you may have
-        paid for seats accounted for that a registrant has not yet claimed their
-        seat within a partnership or corporate block. They will be included in
-        the count upon submission of their registration using your custom link.
+      <Text fw={400} px={"md"} color="dimmed" size={"sm"}>
+        Note: This is the current number of registrants in the system. You may
+        have additional paid for seats accounted for where the identified
+        registrant has not yet claimed within your partnership or corporate
+        block(s). They will be included in this total count upon submission of
+        their registration using your custom link.
       </Text>
       <Divider color="#ff1d6c" />
       <Stack p={"sm"}>
@@ -102,7 +103,7 @@ export const App = () => {
         </Suspense>
         <Space h={"xl"} />
         <Text color="#2647ff" size={"xl"} weight={500}>
-          Registrations not under this partnership
+          Company Registrations Made Outside your Partnership Submission
         </Text>
         <Suspense fallback={null}>
           <CorporateMembersTable

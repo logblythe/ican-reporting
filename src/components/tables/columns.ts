@@ -14,10 +14,11 @@ export const COMPANY_MEMBER_COLUMNS: MRT_ColumnDef<CompanyMember>[] = [
     accessorKey: "attendanceType",
     header: "Type",
   },
-  {
-    accessorKey: "registrationStatus",
-    header: "Complete",
-  },
+  //INFO: hidden as requested by Sydney
+  // {
+  //   accessorKey: "registrationStatus",
+  //   header: "Complete",
+  // },
 ];
 
 export const CORPORATE_MEMBER_COLUMNS: MRT_ColumnDef<CorporateMember>[] = [
@@ -38,17 +39,19 @@ export const CORPORATE_MEMBER_COLUMNS: MRT_ColumnDef<CorporateMember>[] = [
     accessorKey: "registrationType",
     header: "Registration Type",
   },
-  {
-    accessorKey: "blockCode",
-    header: "Code",
-  },
+  //INFO: hidden as requested by Sydney
+  // {
+  //   accessorKey: "blockCode",
+  //   header: "Code",
+  // },
 ];
 
 export const INDIVIDUAL_MEMBER_COLUMNS: MRT_ColumnDef<IndividualMember>[] = [
-  {
-    accessorKey: "id",
-    header: "ID",
-  },
+  //INFO: hidden as requested by Sydney
+  // {
+  //   accessorKey: "id",
+  //   header: "ID",
+  // },
   {
     accessorKey: "name",
     header: "Name",
@@ -65,8 +68,9 @@ export const INDIVIDUAL_MEMBER_COLUMNS: MRT_ColumnDef<IndividualMember>[] = [
     accessorKey: "attendanceType",
     header: "Type",
   },
-  {
-    accessorKey: "registrationStatus",
-    header: "Complete",
-  },
+  //INFO: hidden as requested by Sydney
+  // {
+  //   accessorKey: "registrationStatus",
+  //   header: "Complete",
+  // },
 ];

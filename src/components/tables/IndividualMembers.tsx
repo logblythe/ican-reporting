@@ -43,7 +43,7 @@ export const IndividualMembersTable = ({ data = [], isLoading }: Props) => {
     <Card shadow="sm" padding="0" radius="md" withBorder>
       <Card.Section withBorder inheritPadding p="xs">
         <Text color="#2647ff" size={"lg"} weight={500}>
-          Individuals
+          Single Individuals and Corporate Block Individuals
         </Text>
       </Card.Section>
       <Stack>
