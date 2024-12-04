@@ -12,6 +12,10 @@ export const COMPANY_MEMBER_COLUMNS: MRT_ColumnDef<CompanyMember>[] = [
   },
   {
     accessorKey: "attendanceType",
+    header: "Attendance",
+  },
+  {
+    accessorKey: "attendanceTypePartnership",
     header: "Type",
   },
   //INFO: hidden as requested by Sydney

@@ -7,7 +7,9 @@ type BaseMember = {
   registrationStatus: string;
 };
 
-export type CompanyMember = BaseMember;
+export type CompanyMember = BaseMember & {
+  attendanceTypePartnership: string;
+};
 
 export type CorporateMember = BaseMember & {
   registrationType: string;
