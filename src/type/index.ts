@@ -34,3 +34,24 @@ export type MemberResponseType = {
   corporateNonAttendingMemberSize: number;
   individualMemberSize: number;
 };
+
+export type EventInfo = {
+  eventDate: string;
+  eventName: string;
+  inPersonData: {
+    individual: number;
+    corporateBlockSeats: number;
+    partnershipBlockSeats: number;
+  };
+  virtualData: {
+    individual: number;
+    corporateBlockSeats: number;
+    partnershipBlockSeats: number;
+  };
+  partnershipRegistrationsCompleted: number;
+  totalCorporateBlockSeatsPurchased: number;
+  partnershipBlockSeatsPurchased: number;
+  totalIndividualRegistrationsCompleted: number;
+  totalRegistrationsCount: number;
+  unusedRegistrationsWithLink: number;
+};
