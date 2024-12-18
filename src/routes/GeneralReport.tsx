@@ -50,12 +50,12 @@ const GeneralReport = () => {
   }, [year]);
 
   return (
-    <Stack spacing={0} p={"xl"} maw={"60%"} mx={"auto"} pt={0}>
+    <Stack spacing={0} maw={"60%"} pt={0} pl={64}>
       {networkStatus === "loading" && (
         <Progress radius="xs" size="xs" value={100} striped animate />
       )}
       <Stack fz={"sm"}>
-        <Text fw={"700"} fz={28}>
+        <Text fw={"700"} fz={24}>
           {response?.eventName ?? ""}
         </Text>
         <Divider />
