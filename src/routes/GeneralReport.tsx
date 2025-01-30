@@ -67,7 +67,7 @@ const GeneralReport = () => {
             <Text>{response?.eventDate ?? ""}</Text>
           </Grid.Col>
           <Grid.Col span={6}>
-            <Text fw={"500"}>Total Registrations Count:</Text>{" "}
+            <Text fw={"500"}>Total Registration Submissions:</Text>{" "}
           </Grid.Col>
           <Grid.Col span={6}>
             <Text>{response?.totalRegistrationsCount ?? ""}</Text>
