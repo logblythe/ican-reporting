@@ -1,4 +1,13 @@
-import { Divider, Image, Space, Stack, Text, Title } from "@mantine/core";
+import {
+  Button,
+  Divider,
+  Flex,
+  Image,
+  Space,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import header from "../assets/ican-header.jpg";
 import { MemberResponseType, NetworkStatus } from "../type";
@@ -68,6 +77,20 @@ export const DetailReport = () => {
     fetchData();
   }, [cid, company, year]);
 
+  const handleExtract = async () => {
+    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/export?company=${companyParam}&cid=${cidParam}&year=${yearParam}`;
+
+    try {
+      const res = await fetch(url);
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status} ${res.statusText}`);
+      }
+    } catch (err: any) {
+      throw new Error(`Network or fetch error: ${err.message}`);
+    }
+  };
+
   return (
     <Stack spacing={0}>
       <Image alt="ican-logo" src={header} />
@@ -92,9 +115,13 @@ export const DetailReport = () => {
       </Text>
       <Divider color="#ff1d6c" />
       <Stack p={"sm"}>
-        <Text color="#2647ff" size={"xl"} weight={500}>
-          Registrations under this partnership
-        </Text>
+        <Flex gap={"md"}>
+          <Text color="#2647ff" size={"xl"} weight={500}>
+            Registrations under this partnership
+          </Text>
+          <Button onClick={handleExtract}>Extract</Button>
+        </Flex>
+
         <Suspense fallback={null}>
           <CompanyMembersTable
             data={response?.companyMembers}
