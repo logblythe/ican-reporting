@@ -78,7 +78,7 @@ export const DetailReport = () => {
   }, [cid, company, year]);
 
   const handleExtract = async () => {
-    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/export?company=planit%20inc.&cid=${cidParam}&year=${yearParam}`;
+    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/export?company=${companyParam}&cid=${cidParam}&year=${yearParam}`;
 
     try {
       const res = await fetch(url);
