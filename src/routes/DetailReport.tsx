@@ -78,19 +78,27 @@ export const DetailReport = () => {
   }, [cid, company, year]);
 
   const handleExtract = async () => {
-    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/export?company=${companyParam}&cid=${cidParam}&year=${yearParam}`;
-
+    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/export?company=${company}&cid=${cid}&year=${year}`;
     try {
-      const res = await fetch(url);
-
+      const res = await fetch(url, {
+        method: "GET",
+      });
       if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status} ${res.statusText}`);
+        throw new Error(`HTTP error! Status: ${res.status}`);
       }
+      const blob = await res.blob();
+      const fileURL = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = fileURL;
+      link.download = "report.xlsx";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(fileURL);
     } catch (err: any) {
-      throw new Error(`Network or fetch error: ${err.message}`);
+      console.error("Download failed:", err.message);
     }
   };
-
   return (
     <Stack spacing={0}>
       <Image alt="ican-logo" src={header} />
