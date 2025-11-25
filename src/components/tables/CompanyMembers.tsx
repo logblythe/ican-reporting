@@ -42,7 +42,7 @@ export const CompanyMembersTable = ({ data = [], isLoading }: Props) => {
   return (
     <Card shadow="sm" padding="0" radius="md" withBorder>
       <Card.Section withBorder inheritPadding p="xs">
-        <Text color="#2647ff" size={"lg"} weight={500}>
+        <Text color="#3FA9F5" size={"lg"} weight={500}>
           Partnership Block Members per Benefits and Additional Registrations
           made under Partnership
         </Text>
