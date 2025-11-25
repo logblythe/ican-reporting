@@ -127,7 +127,7 @@ export const DetailReport = () => {
           <Text color="#2647ff" size={"xl"} weight={500}>
             Registrations under this partnership
           </Text>
-          <Button onClick={handleExtract}>Extract</Button>
+          <Button onClick={handleExtract}>Export</Button>
         </Flex>
 
         <Suspense fallback={null}>
