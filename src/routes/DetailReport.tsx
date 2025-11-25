@@ -137,9 +137,12 @@ export const DetailReport = () => {
           />
         </Suspense>
         <Space h={"xl"} />
-        <Text color="#3FA9F5" size={"xl"} weight={500}>
-          Company Registrations Made Outside your Partnership Submission
-        </Text>
+        <Flex gap={"md"}>
+          <Text color="#3FA9F5" size={"xl"} weight={500}>
+            Company Registrations Made Outside your Partnership Submission
+          </Text>
+          <Button onClick={handleExtract}>Export</Button>
+        </Flex>
         <Suspense fallback={null}>
           <CorporateMembersTable
             data={response?.corporateMembers}
@@ -150,6 +153,7 @@ export const DetailReport = () => {
           <IndividualMembersTable
             data={response?.individualMembers}
             isLoading={networkStatus === "loading"}
+            onExport={handleExtract}
           />
         </Suspense>
         <Space h={"xl"} />
