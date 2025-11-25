@@ -9,7 +9,7 @@ import {
   Title,
 } from "@mantine/core";
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
-import header from "../assets/ican-header.jpg";
+import header from "../assets/planit-site_header-2 (6).png";
 import { MemberResponseType, NetworkStatus } from "../type";
 
 const CompanyMembersTable = lazy(
@@ -103,7 +103,7 @@ export const DetailReport = () => {
     <Stack spacing={0}>
       <Image alt="ican-logo" src={header} />
       <Divider color="#ff1d6c" />
-      <Title order={2} weight={700} size={28} color="#ff1d6c" px={"md"}>
+      <Title order={2} weight={700} size={28} color="#2E3192" px={"md"}>
         Partner Report
       </Title>
       <Text fw={500} px={"md"} color="#162034">
@@ -124,7 +124,7 @@ export const DetailReport = () => {
       <Divider color="#ff1d6c" />
       <Stack p={"sm"}>
         <Flex gap={"md"}>
-          <Text color="#2647ff" size={"xl"} weight={500}>
+          <Text color="#3FA9F5" size={"xl"} weight={500}>
             Registrations under this partnership
           </Text>
           <Button onClick={handleExtract}>Export</Button>
@@ -137,7 +137,7 @@ export const DetailReport = () => {
           />
         </Suspense>
         <Space h={"xl"} />
-        <Text color="#2647ff" size={"xl"} weight={500}>
+        <Text color="#3FA9F5" size={"xl"} weight={500}>
           Company Registrations Made Outside your Partnership Submission
         </Text>
         <Suspense fallback={null}>
