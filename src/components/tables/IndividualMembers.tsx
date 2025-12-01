@@ -51,7 +51,9 @@ export const IndividualMembersTable = ({
           <Text color="#3FA9F5" size={"lg"} weight={500}>
             Single Individuals and Corporate Block Individuals
           </Text>
-          <Button onClick={onExport}>Export</Button>
+          <Button onClick={onExport} variant="outline">
+            Download
+          </Button>
         </Flex>
       </Card.Section>
       <Stack>
