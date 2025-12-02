@@ -77,8 +77,8 @@ export const DetailReport = () => {
     fetchData();
   }, [cid, company, year]);
 
-  const handleRegistrationExtract = async () => {
-    const url = `https://ican-reporting.vercel.app/?company=planit%20inc.&cid=59859427&year=2026&type=Partnership`;
+  const handlePartnershipExtract = async () => {
+    const url = `https://ican-reporting.vercel.app/api/v1/report/exportReport?company=planit%20inc.&cid=59859427&year=2026&type=Partnership`;
     try {
       const res = await fetch(url, {
         method: "GET",
@@ -101,7 +101,7 @@ export const DetailReport = () => {
   };
 
   const handleCompanyExtract = async () => {
-    const url = `https://ican-reporting.vercel.app/?company=planit%20inc.&cid=59859427&year=2026&type=Company`;
+    const url = `https://ican-reporting.vercel.app/api/v1/report/exportReport?company=planit%20inc.&cid=59859427&year=2026&type=Company`;
     try {
       const res = await fetch(url, {
         method: "GET",
@@ -124,7 +124,7 @@ export const DetailReport = () => {
   };
 
   const handleExtract = async () => {
-    const url = `https://ican-reporting.vercel.app/?company=planit%20inc.&cid=59859427&year=2026&type=Single`;
+    const url = `https://ican-reporting.vercel.app/api/v1/report/exportReport?company=planit%20inc.&cid=59859427&year=2026&type=Single`;
     try {
       const res = await fetch(url, {
         method: "GET",
@@ -173,7 +173,7 @@ export const DetailReport = () => {
           <Text color="#3FA9F5" size={"xl"} weight={500}>
             Registrations under this partnership
           </Text>
-          <Button onClick={handleRegistrationExtract} variant="outline">
+          <Button onClick={handlePartnershipExtract} variant="outline">
             Dowload
           </Button>
         </Flex>
