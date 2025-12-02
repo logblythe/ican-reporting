@@ -121,7 +121,7 @@ export const DetailReport = () => {
         block(s). They will be included in this total count upon submission of
         their registration using your custom link.
       </Text>
-      <Divider color="#ff1d6c" />
+      <Divider color="#2E3192" />
       <Stack p={"sm"}>
         <Flex gap={"md"}>
           <Text color="#3FA9F5" size={"xl"} weight={500}>
