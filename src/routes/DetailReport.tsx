@@ -78,19 +78,20 @@ export const DetailReport = () => {
   }, [cid, company, year]);
 
   const handlePartnershipExtract = async () => {
-    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Partnership`;
     try {
-      const res = await fetch(url, {
-        method: "GET",
-      });
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
+      const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Partnership`;
+      const res = await fetch(url, { method: "GET" });
+      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
       const blob = await res.blob();
       const fileURL = window.URL.createObjectURL(blob);
+      const disposition = res.headers.get("Content-Disposition");
+      let filename = "report.csv";
+      if (disposition && disposition.includes("filename=")) {
+        filename = disposition.split("filename=")[1].replace(/"/g, "").trim();
+      }
       const link = document.createElement("a");
       link.href = fileURL;
-      link.download = "report.xlsx";
+      link.download = filename;
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -99,21 +100,21 @@ export const DetailReport = () => {
       console.error("Download failed:", err.message);
     }
   };
-
   const handleCompanyExtract = async () => {
-    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Company`;
     try {
-      const res = await fetch(url, {
-        method: "GET",
-      });
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
+      const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Company`;
+      const res = await fetch(url, { method: "GET" });
+      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
       const blob = await res.blob();
       const fileURL = window.URL.createObjectURL(blob);
+      const disposition = res.headers.get("Content-Disposition");
+      let filename = "report.csv";
+      if (disposition && disposition.includes("filename=")) {
+        filename = disposition.split("filename=")[1].replace(/"/g, "").trim();
+      }
       const link = document.createElement("a");
       link.href = fileURL;
-      link.download = "report.xlsx";
+      link.download = filename;
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -122,21 +123,21 @@ export const DetailReport = () => {
       console.error("Download failed:", err.message);
     }
   };
-
   const handleExtract = async () => {
-    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Single`;
     try {
-      const res = await fetch(url, {
-        method: "GET",
-      });
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
+      const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Single`;
+      const res = await fetch(url, { method: "GET" });
+      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
       const blob = await res.blob();
       const fileURL = window.URL.createObjectURL(blob);
+      const disposition = res.headers.get("Content-Disposition");
+      let filename = "report.csv";
+      if (disposition && disposition.includes("filename=")) {
+        filename = disposition.split("filename=")[1].replace(/"/g, "").trim();
+      }
       const link = document.createElement("a");
       link.href = fileURL;
-      link.download = "report.xlsx";
+      link.download = filename;
       document.body.appendChild(link);
       link.click();
       link.remove();
