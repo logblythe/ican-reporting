@@ -102,7 +102,7 @@ export const DetailReport = () => {
   return (
     <Stack spacing={0}>
       <Image alt="ican-logo" src={header} />
-      <Divider color="#ff1d6c" />
+      <Divider color="#2E3192" />
       <Title order={2} weight={700} size={28} color="#2E3192" px={"md"}>
         Partner Report
       </Title>
