@@ -78,7 +78,7 @@ export const DetailReport = () => {
   }, [cid, company, year]);
 
   const handlePartnershipExtract = async () => {
-    const url = `https://ican-reporting.vercel.app/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Partnership`;
+    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Partnership`;
     try {
       const res = await fetch(url, {
         method: "GET",
@@ -101,7 +101,7 @@ export const DetailReport = () => {
   };
 
   const handleCompanyExtract = async () => {
-    const url = `https://ican-reporting.vercel.app/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Company`;
+    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Company`;
     try {
       const res = await fetch(url, {
         method: "GET",
@@ -124,7 +124,7 @@ export const DetailReport = () => {
   };
 
   const handleExtract = async () => {
-    const url = `https://ican-reporting.vercel.app/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Single`;
+    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Single`;
     try {
       const res = await fetch(url, {
         method: "GET",
