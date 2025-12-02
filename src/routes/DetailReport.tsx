@@ -77,8 +77,54 @@ export const DetailReport = () => {
     fetchData();
   }, [cid, company, year]);
 
+  const handleRegistrationExtract = async () => {
+    const url = `https://ican-reporting.vercel.app/?company=planit%20inc.&cid=59859427&year=2026&type=Partnership`;
+    try {
+      const res = await fetch(url, {
+        method: "GET",
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      const blob = await res.blob();
+      const fileURL = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = fileURL;
+      link.download = "report.xlsx";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(fileURL);
+    } catch (err: any) {
+      console.error("Download failed:", err.message);
+    }
+  };
+
+  const handleCompanyExtract = async () => {
+    const url = `https://ican-reporting.vercel.app/?company=planit%20inc.&cid=59859427&year=2026&type=Company`;
+    try {
+      const res = await fetch(url, {
+        method: "GET",
+      });
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      const blob = await res.blob();
+      const fileURL = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = fileURL;
+      link.download = "report.xlsx";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(fileURL);
+    } catch (err: any) {
+      console.error("Download failed:", err.message);
+    }
+  };
+
   const handleExtract = async () => {
-    const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/export?company=${company}&cid=${cid}&year=${year}`;
+    const url = `https://ican-reporting.vercel.app/?company=planit%20inc.&cid=59859427&year=2026&type=Single`;
     try {
       const res = await fetch(url, {
         method: "GET",
@@ -127,7 +173,7 @@ export const DetailReport = () => {
           <Text color="#3FA9F5" size={"xl"} weight={500}>
             Registrations under this partnership
           </Text>
-          <Button onClick={handleExtract} variant="outline">
+          <Button onClick={handleRegistrationExtract} variant="outline">
             Dowload
           </Button>
         </Flex>
@@ -143,7 +189,7 @@ export const DetailReport = () => {
           <Text color="#3FA9F5" size={"xl"} weight={500}>
             Company Registrations Made Outside your Partnership Submission
           </Text>
-          <Button onClick={handleExtract} variant="outline">
+          <Button onClick={handleCompanyExtract} variant="outline">
             Download
           </Button>
         </Flex>
