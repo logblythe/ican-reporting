@@ -127,7 +127,9 @@ export const DetailReport = () => {
           <Text color="#3FA9F5" size={"xl"} weight={500}>
             Registrations under this partnership
           </Text>
-          <Button onClick={handleExtract}>Export</Button>
+          <Button onClick={handleExtract} variant="outline">
+            Dowload
+          </Button>
         </Flex>
 
         <Suspense fallback={null}>
@@ -141,7 +143,9 @@ export const DetailReport = () => {
           <Text color="#3FA9F5" size={"xl"} weight={500}>
             Company Registrations Made Outside your Partnership Submission
           </Text>
-          <Button onClick={handleExtract}>Export</Button>
+          <Button onClick={handleExtract} variant="outline">
+            Download
+          </Button>
         </Flex>
         <Suspense fallback={null}>
           <CorporateMembersTable
