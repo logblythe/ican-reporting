@@ -172,10 +172,10 @@ export const DetailReport = () => {
       <Stack p={"sm"}>
         <Flex gap={"md"}>
           <Text color="#3FA9F5" size={"xl"} weight={500}>
-            Registrations under this partnership
+            Registrations Under This Partnership
           </Text>
           <Button onClick={handlePartnershipExtract} variant="outline">
-            Dowload
+            Download
           </Button>
         </Flex>
 
