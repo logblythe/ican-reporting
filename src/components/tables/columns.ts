@@ -43,6 +43,14 @@ export const CORPORATE_MEMBER_COLUMNS: MRT_ColumnDef<CorporateMember>[] = [
     accessorKey: "registrationType",
     header: "Registration Type",
   },
+  {
+    accessorKey: "company",
+    header: "Company",
+  },
+  {
+    accessorKey: "willYouPersonallyAttend",
+    header: "Will you personally be attending the event?",
+  },
   //INFO: hidden as requested by Sydney
   // {
   //   accessorKey: "blockCode",
@@ -71,6 +79,10 @@ export const INDIVIDUAL_MEMBER_COLUMNS: MRT_ColumnDef<IndividualMember>[] = [
   {
     accessorKey: "attendanceType",
     header: "Type",
+  },
+  {
+    accessorKey: "company",
+    header: "Company",
   },
   //INFO: hidden as requested by Sydney
   // {

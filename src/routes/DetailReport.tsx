@@ -11,6 +11,7 @@ import {
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import header from "../assets/planit-site_header-2 (6).png";
 import { MemberResponseType, NetworkStatus } from "../type";
+import { Loader2 } from "lucide-react";
 
 const CompanyMembersTable = lazy(
   () => import("../components/tables/CompanyMembers")
@@ -34,7 +35,7 @@ export const DetailReport = () => {
   const [company, setCompany] = useState<string>(companyParam);
   const [cid, setCid] = useState<string>(cidParam);
   const [year, setYear] = useState<string>(yearParam);
-
+  const [isDownloading, setIsDownloading] = useState(false);
   const [response, setResponse] = useState<MemberResponseType | null>(null);
   const [networkStatus, setNetworkStatus] = useState<NetworkStatus>("idle");
 
@@ -77,8 +78,9 @@ export const DetailReport = () => {
     fetchData();
   }, [cid, company, year]);
 
-  const handlePartnershipExtract = async () => {
+  const handleExtract = async () => {
     try {
+      setIsDownloading(true);
       const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Partnership`;
       const res = await fetch(url, { method: "GET" });
       if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
@@ -98,60 +100,17 @@ export const DetailReport = () => {
       URL.revokeObjectURL(fileURL);
     } catch (err: any) {
       console.error("Download failed:", err.message);
+    } finally {
+      setIsDownloading(false);
     }
   };
-  const handleCompanyExtract = async () => {
-    try {
-      const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Company`;
-      const res = await fetch(url, { method: "GET" });
-      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-      const blob = await res.blob();
-      const fileURL = window.URL.createObjectURL(blob);
-      const disposition = res.headers.get("Content-Disposition");
-      let filename = "report.csv";
-      if (disposition && disposition.includes("filename=")) {
-        filename = disposition.split("filename=")[1].replace(/"/g, "").trim();
-      }
-      const link = document.createElement("a");
-      link.href = fileURL;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(fileURL);
-    } catch (err: any) {
-      console.error("Download failed:", err.message);
-    }
-  };
-  const handleExtract = async () => {
-    try {
-      const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Single`;
-      const res = await fetch(url, { method: "GET" });
-      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-      const blob = await res.blob();
-      const fileURL = window.URL.createObjectURL(blob);
-      const disposition = res.headers.get("Content-Disposition");
-      let filename = "report.csv";
-      if (disposition && disposition.includes("filename=")) {
-        filename = disposition.split("filename=")[1].replace(/"/g, "").trim();
-      }
-      const link = document.createElement("a");
-      link.href = fileURL;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(fileURL);
-    } catch (err: any) {
-      console.error("Download failed:", err.message);
-    }
-  };
+
   return (
     <Stack spacing={0}>
       <Image alt="ican-logo" src={header} />
       <Divider color="#2E3192" />
       <Title order={2} weight={700} size={28} color="#2E3192" px={"md"}>
-        Partner Report
+        ICAN Partner Report
       </Title>
       <Text fw={500} px={"md"} color="#162034">
         Grand Total:{" "}
@@ -163,10 +122,10 @@ export const DetailReport = () => {
       </Text>
       <Text fw={400} px={"md"} color="dimmed" size={"sm"}>
         Note: This is the current number of registrants in the system. You may
-        have additional paid for seats accounted for where the identified
-        registrant has not yet claimed within your partnership or corporate
-        block(s). They will be included in this total count upon submission of
-        their registration using your custom link.
+        have additional paid for/accounted for seats within your partnership or
+        corporate block(s) that the identified registrant has not yet claimed.
+        They will be included in this total count upon submission of their
+        registration using your custom link.
       </Text>
       <Divider color="#2E3192" />
       <Stack p={"sm"}>
@@ -174,8 +133,13 @@ export const DetailReport = () => {
           <Text color="#3FA9F5" size={"xl"} weight={500}>
             Registrations Under This Partnership
           </Text>
-          <Button onClick={handlePartnershipExtract} variant="outline">
-            Download
+
+          <Button
+            onClick={handleExtract}
+            variant="outline"
+            loading={isDownloading}
+          >
+            {isDownloading ? "Downloading" : "Download"}
           </Button>
         </Flex>
 
@@ -190,9 +154,6 @@ export const DetailReport = () => {
           <Text color="#3FA9F5" size={"xl"} weight={500}>
             Company Registrations Made Outside your Partnership Submission
           </Text>
-          <Button onClick={handleCompanyExtract} variant="outline">
-            Download
-          </Button>
         </Flex>
         <Suspense fallback={null}>
           <CorporateMembersTable
@@ -204,7 +165,6 @@ export const DetailReport = () => {
           <IndividualMembersTable
             data={response?.individualMembers}
             isLoading={networkStatus === "loading"}
-            onExport={handleExtract}
           />
         </Suspense>
         <Space h={"xl"} />

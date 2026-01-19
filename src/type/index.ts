@@ -18,11 +18,13 @@ export type CorporateMember = BaseMember & {
   blockCode: string;
   virtualSeats: number;
   inPersonSeats: number;
+  willYouPersonallyAttend: string;
 };
 
 export type IndividualMember = BaseMember & {
   id: string;
   registrationType: string;
+  company: string;
 };
 
 export type MemberResponseType = {
