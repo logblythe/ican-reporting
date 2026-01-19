@@ -11,7 +11,6 @@ import {
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import header from "../assets/planit-site_header-2 (6).png";
 import { MemberResponseType, NetworkStatus } from "../type";
-import { Loader2 } from "lucide-react";
 
 const CompanyMembersTable = lazy(
   () => import("../components/tables/CompanyMembers")
