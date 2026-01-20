@@ -80,7 +80,7 @@ export const DetailReport = () => {
   const handleExtract = async () => {
     try {
       setIsDownloading(true);
-      const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}&type=Partnership`;
+      const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}`;
       const res = await fetch(url, { method: "GET" });
       if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
       const blob = await res.blob();

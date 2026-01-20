@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Stack, Text } from "@mantine/core";
+import { Card, Flex, Stack, Text } from "@mantine/core";
 import {
   MRT_Table,
   useMantineReactTable, //import alternative sub-component if we do not want toolbars
