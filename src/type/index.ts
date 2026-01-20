@@ -18,6 +18,7 @@ export type CorporateMember = BaseMember & {
   blockCode: string;
   virtualSeats: number;
   inPersonSeats: number;
+  isAttending: boolean;
   willYouPersonallyAttend: boolean;
 };
 
