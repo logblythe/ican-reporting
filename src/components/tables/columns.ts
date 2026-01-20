@@ -48,8 +48,8 @@ export const CORPORATE_MEMBER_COLUMNS: MRT_ColumnDef<CorporateMember>[] = [
     header: "Company",
   },
   {
-    accessorKey: "willYouPersonallyAttend",
-    header: "Will you personally be attending the event?",
+    accessorKey: "isAttending",
+    header: "Is attending",
     Cell: ({ cell }) => (cell.getValue<boolean>() ? "True" : "False"),
   },
   //INFO: hidden as requested by Sydney
