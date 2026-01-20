@@ -50,6 +50,7 @@ export const CORPORATE_MEMBER_COLUMNS: MRT_ColumnDef<CorporateMember>[] = [
   {
     accessorKey: "willYouPersonallyAttend",
     header: "Will you personally be attending the event?",
+    Cell: ({ cell }) => (cell.getValue<boolean>() ? "True" : "False"),
   },
   //INFO: hidden as requested by Sydney
   // {
