@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Stack, Text } from "@mantine/core";
+import { Card, Flex, Stack, Text } from "@mantine/core";
 import {
   MRT_Table,
   useMantineReactTable, //import alternative sub-component if we do not want toolbars
@@ -10,14 +10,9 @@ import { INDIVIDUAL_MEMBER_COLUMNS } from "./columns";
 type Props = {
   data?: IndividualMember[];
   isLoading: boolean;
-  onExport: () => void;
 };
 
-export const IndividualMembersTable = ({
-  data = [],
-  isLoading,
-  onExport,
-}: Props) => {
+export const IndividualMembersTable = ({ data = [], isLoading }: Props) => {
   const table = useMantineReactTable({
     columns: INDIVIDUAL_MEMBER_COLUMNS as MRT_ColumnDef<IndividualMember>[],
     data,
@@ -51,9 +46,6 @@ export const IndividualMembersTable = ({
           <Text color="#3FA9F5" size={"lg"} weight={500}>
             Single Individuals and Corporate Block Individuals
           </Text>
-          <Button onClick={onExport} variant="outline">
-            Download
-          </Button>
         </Flex>
       </Card.Section>
       <Stack>
