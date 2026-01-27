@@ -76,31 +76,6 @@ const GeneralReport = () => {
         <Divider />
         <Stack mb={"lg"}>
           <Text fw={"500"} fz={32}>
-            Virtual
-          </Text>
-          <Grid>
-            <Grid.Col span={6}>
-              <Text fw={"500"}>Individual:</Text>
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Text>{response?.virtualData.individual}</Text>
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Text fw={"500"}>Corporate Block Seats: </Text>
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Text>{response?.virtualData.corporateBlockSeats}</Text>
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Text fw={"500"}>Partnership Block Seats: </Text>
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <Text>{response?.virtualData.partnershipBlockSeats}</Text>
-            </Grid.Col>
-          </Grid>
-        </Stack>
-        <Stack mb={"lg"}>
-          <Text fw={"500"} fz={32}>
             In-Person
           </Text>
           <Grid>
@@ -124,6 +99,32 @@ const GeneralReport = () => {
             </Grid.Col>
           </Grid>
         </Stack>
+        <Stack mb={"lg"}>
+          <Text fw={"500"} fz={32}>
+            Virtual
+          </Text>
+          <Grid>
+            <Grid.Col span={6}>
+              <Text fw={"500"}>Individual:</Text>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Text>{response?.virtualData.individual}</Text>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Text fw={"500"}>Corporate Block Seats: </Text>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Text>{response?.virtualData.corporateBlockSeats}</Text>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Text fw={"500"}>Partnership Block Seats: </Text>
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Text>{response?.virtualData.partnershipBlockSeats}</Text>
+            </Grid.Col>
+          </Grid>
+        </Stack>
+
         <Stack mb={"lg"}>
           <Grid>
             <Grid.Col span={6}>
