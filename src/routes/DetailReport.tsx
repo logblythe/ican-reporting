@@ -128,18 +128,19 @@ export const DetailReport = () => {
       </Text>
       <Divider color="#2E3192" />
       <Stack p={"sm"}>
+        <Button
+          size="md"
+          onClick={handleExtract}
+          variant="outline"
+          loading={isDownloading}
+          style={{ alignSelf: "flex-end" }}
+        >
+          {isDownloading ? "Downloading" : "Download All Attendees"}
+        </Button>
         <Flex gap={"md"}>
           <Text color="#3FA9F5" size={"xl"} weight={500}>
             Registrations Under This Partnership
           </Text>
-
-          <Button
-            onClick={handleExtract}
-            variant="outline"
-            loading={isDownloading}
-          >
-            {isDownloading ? "Downloading" : "Download"}
-          </Button>
         </Flex>
 
         <Suspense fallback={null}>
