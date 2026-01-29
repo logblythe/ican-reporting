@@ -133,7 +133,7 @@ export const DetailReport = () => {
           onClick={handleExtract}
           variant="outline"
           loading={isDownloading}
-          style={{ alignSelf: "flex-end" }}
+          style={{ alignSelf: "flex-start" }}
         >
           {isDownloading ? "Downloading" : "Download All Attendees"}
         </Button>
