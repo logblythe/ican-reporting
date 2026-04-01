@@ -1,11 +1,12 @@
 import { Divider, Grid, Progress, Stack, Text } from "@mantine/core";
 import { useEffect, useMemo, useState } from "react";
+import { BASE_URL } from "../const";
 import { EventInfo, NetworkStatus } from "../type";
 
 const GeneralReport = () => {
   const queryParams = useMemo(
     () => new URLSearchParams(window.location.search),
-    []
+    [],
   );
   const yearParam = queryParams.get("year") ?? "";
 
@@ -20,7 +21,7 @@ const GeneralReport = () => {
       window.history.pushState(
         {},
         "",
-        `${window.location.pathname}?${queryParams.toString()}`
+        `${window.location.pathname}?${queryParams.toString()}`,
       );
       setYear("2024");
     }
@@ -34,10 +35,10 @@ const GeneralReport = () => {
       try {
         setNetworkStatus("loading");
         const networkResponse = await fetch(
-          `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/summary?year=${year}`,
+          `${BASE_URL}/report/summary?year=${year}`,
           {
             method: "GET",
-          }
+          },
         );
         const data = await networkResponse.json();
         setResponse(data);

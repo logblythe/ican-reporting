@@ -10,62 +10,42 @@ import {
 } from "@mantine/core";
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import header from "../assets/planit-site_header-2 (6).png";
+import { BASE_URL } from "../const";
 import { MemberResponseType, NetworkStatus } from "../type";
 
 const CompanyMembersTable = lazy(
-  () => import("../components/tables/CompanyMembers")
+  () => import("../components/tables/CompanyMembers"),
 );
 const CorporateMembersTable = lazy(
-  () => import("../components/tables/CorporateMembers")
+  () => import("../components/tables/CorporateMembers"),
 );
 const IndividualMembersTable = lazy(
-  () => import("../components/tables/IndividualMembers")
+  () => import("../components/tables/IndividualMembers"),
 );
 
 export const DetailReport = () => {
   const queryParams = useMemo(
     () => new URLSearchParams(window.location.search),
-    []
+    [],
   );
-  const companyParam = queryParams.get("company") ?? "";
-  const cidParam = queryParams.get("cid") ?? "";
-  const yearParam = queryParams.get("year") ?? "";
 
-  const [company, setCompany] = useState<string>(companyParam);
-  const [cid, setCid] = useState<string>(cidParam);
-  const [year, setYear] = useState<string>(yearParam);
+  const company = queryParams.get("company") ?? "";
+  const cid = queryParams.get("cid") ?? "";
+  const year = queryParams.get("year") ?? "";
+
   const [isDownloading, setIsDownloading] = useState(false);
   const [response, setResponse] = useState<MemberResponseType | null>(null);
   const [networkStatus, setNetworkStatus] = useState<NetworkStatus>("idle");
 
   useEffect(() => {
-    if (!companyParam || !cidParam) {
-      queryParams.set("company", "fnbo");
-      queryParams.set("cid", "33897499");
-      queryParams.set("year", "2024");
-      window.history.pushState(
-        {},
-        "",
-        `${window.location.pathname}?${queryParams.toString()}`
-      );
-      setCompany("fnbo");
-      setCid("33897499");
-      setYear("2024");
-    }
-  }, [cidParam, companyParam, queryParams]);
-
-  useEffect(() => {
-    if (company.length === 0 || cid.length === 0) {
-      return;
-    }
     const fetchData = async () => {
       try {
         setNetworkStatus("loading");
         const networkResponse = await fetch(
-          `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report?company=${company}&cid=${cid}&year=${year}`,
+          `${BASE_URL}/report?company=${company}&cid=${cid}&year=${year}`,
           {
             method: "GET",
-          }
+          },
         );
         const data = await networkResponse.json();
         setResponse(data);
@@ -80,7 +60,7 @@ export const DetailReport = () => {
   const handleExtract = async () => {
     try {
       setIsDownloading(true);
-      const url = `https://ican-2024-88255e5bae19.herokuapp.com/api/v1/report/exportReport?company=${company}&cid=${cid}&year=${year}`;
+      const url = `${BASE_URL}/report/exportReport?company=${company}&cid=${cid}&year=${year}`;
       const res = await fetch(url, { method: "GET" });
       if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
       const blob = await res.blob();
